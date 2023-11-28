@@ -1,0 +1,37 @@
+.bangalore {
+  background-image: linear-gradient(to bottom, #d91c1f, #1e293b);
+}
+.kolkata {
+  background-image: linear-gradient(to bottom, #5755a7, #1e293b);
+}
+.punjab {
+  background-image: linear-gradient(to bottom, #d91c1f, #0f172a);
+}
+.chennai {
+  background-image: linear-gradient(to bottom, #f7db00, #0f172a);
+}
+.rajasthan {
+  background-image: linear-gradient(to bottom, #da237b, #0f172a);
+}
+.mumbai {
+  background-image: linear-gradient(to bottom, #13418b, #0f172a);
+}
+.hyderabad {
+  background-image: linear-gradient(to bottom, #f26d22, #0f172a);
+}
+.delhi {
+  background-image: linear-gradient(to bottom, #4f5db0, #0f172a);
+}
+
+.team-matches-bg-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.team-matches-container {
+  width: 90%;
+}
+.team-banner-image {
+  width: 100%;
+}
