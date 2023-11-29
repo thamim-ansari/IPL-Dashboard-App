@@ -34,4 +34,23 @@
 }
 .team-banner-image {
   width: 100%;
+  margin-top: 45px;
+}
+.latest-match-heading {
+  color: #ffffff;
+  font-family: 'Bree Serif';
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 20px;
+}
+@media screen and (min-width: 768px) {
+  .latest-match-heading {
+    font-size: 18px;
+  }
+}
+.matches-list-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-left: 0px;
 }

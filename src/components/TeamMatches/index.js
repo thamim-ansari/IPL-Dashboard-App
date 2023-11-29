@@ -1,6 +1,7 @@
 import {Component} from 'react'
 import Loader from 'react-loader-spinner'
 import LatestMatch from '../LatestMatch'
+import MatchCard from '../MatchCard'
 import './index.css'
 
 const teamColorList = {
@@ -69,13 +70,13 @@ class TeamMatches extends Component {
   }
 
   renderLoader = () => (
-    <div data-testid="loader">
+    <div testid="loader">
       <Loader type="Oval" color="#ffffff" height={50} width={50} />
     </div>
   )
 
   renderTeamMatches = () => {
-    const {teamBannerImage, LatestMatchData} = this.state
+    const {teamBannerImage, LatestMatchData, matchCardData} = this.state
     return (
       <div className="team-matches-container">
         <img
@@ -83,8 +84,13 @@ class TeamMatches extends Component {
           alt="team banner"
           className="team-banner-image"
         />
-        <h1>Latest Matches</h1>
+        <h1 className="latest-match-heading">Latest Matches</h1>
         <LatestMatch LatestMatchData={LatestMatchData} />
+        <ul className="matches-list-container">
+          {matchCardData.map(eachItem => (
+            <MatchCard key={eachItem.id} matchDetails={eachItem} />
+          ))}
+        </ul>
       </div>
     )
   }

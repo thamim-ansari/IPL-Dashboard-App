@@ -1,1 +1,112 @@
-/* Write your CSS here */
+.latest-match-container {
+  background-color: #0f172a;
+  border-radius: 12px;
+  font-family: 'Bree serif';
+  color: #ffffff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+@media screen and (min-width: 768px) {
+  .latest-match-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+.latest-match-result-and-image-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.competing-team-and-venue-container {
+  width: 180px;
+}
+
+@media screen and (min-width: 768px) {
+  .competing-team-and-venue-container {
+    width: 210px;
+  }
+}
+.latest-match-team-logo {
+  width: 60px;
+  height: 60px;
+}
+@media screen and (min-width: 768px) {
+  .latest-match-team-logo {
+    display: none;
+  }
+}
+.latest-match-team-logo-lg {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .latest-match-team-logo-lg {
+    display: block;
+    width: 150px;
+    height: 150px;
+  }
+}
+.competing-team {
+  font-size: 18px;
+  font-weight: 500;
+}
+@media screen and (min-width: 768px) {
+  .competing-team {
+    font-size: 32px;
+  }
+}
+.latest-match-date {
+  font-size: 16px;
+}
+@media screen and (min-width: 768px) {
+  .latest-match-date {
+    font-size: 18px;
+  }
+}
+.venue-and-result {
+  font-size: 12px;
+}
+@media screen and (min-width: 768px) {
+  .venue-and-result {
+    font-size: 14px;
+  }
+}
+
+.line-break {
+  border: 1px solid #475569;
+  width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .line-break {
+    display: none;
+  }
+}
+.latest-match-stats-container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+@media screen and (min-width: 768px) {
+  .latest-match-stats-container {
+    text-align: right;
+  }
+}
+.match-stats-headings {
+  font-size: 14px;
+}
+@media screen and (min-width: 768px) {
+  .match-stats-headings {
+    font-size: 16px;
+  }
+}
+.stats {
+  font-size: 12px;
+}
+@media screen and (min-width: 768px) {
+  .stats {
+    font-size: 14px;
+  }
+}
