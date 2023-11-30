@@ -1,68 +1,59 @@
-.link-items {
-  text-decoration: none;
-}
 .team-card-items {
+  list-style-type: none;
+  width: 50%;
+}
+.link {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  height: 100px;
-  width: 160px;
+  height: 85%;
   background-color: #ffffff33;
   border: 1px solid #ffffff;
   border-radius: 12px;
-  margin-bottom: 20px;
-  padding-left: 8px;
-  padding-right: 8px;
-  list-style-type: none;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-bottom: 24px;
+  text-decoration: none;
 }
 @media screen and (min-width: 768px) {
-  .team-card-items {
-    height: 180px;
-    width: 395px;
-    margin-bottom: 34px;
+  .link {
+    padding-left: 24px;
+    padding-right: 24px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 30px;
   }
 }
-@media screen and (min-width: 992px) {
-  .team-card-items {
-    height: 130px;
-    width: 340px;
-    padding-left: 12px;
-    padding-right: 12px;
-    margin-bottom: 20px;
-  }
-}
+
 .team-logo-image {
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
 }
 @media screen and (min-width: 768px) {
   .team-logo-image {
-    width: 125px;
-    height: 135px;
+    width: 80px;
+    height: 80px;
   }
 }
 @media screen and (min-width: 992px) {
   .team-logo-image {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
   }
 }
 .team-names {
   color: #ffffff;
   font-family: 'Bree Serif';
   font-size: 12px;
-  width: 84px;
   text-align: center;
+  margin-left: 4px;
 }
 @media screen and (min-width: 768px) {
   .team-names {
-    font-size: 28px;
-    width: 240px;
-  }
-}
-@media screen and (min-width: 992px) {
-  .team-names {
-    font-size: 24px;
-    width: 200px;
+    font-size: 32px;
+    margin-left: 16px;
   }
 }

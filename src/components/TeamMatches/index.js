@@ -1,25 +1,16 @@
 import {Component} from 'react'
 import Loader from 'react-loader-spinner'
+
 import LatestMatch from '../LatestMatch'
 import MatchCard from '../MatchCard'
+
 import './index.css'
 
-const teamColorList = {
-  RCB: 'bangalore',
-  KKR: 'kolkata',
-  KXP: 'punjab',
-  CSK: 'chennai',
-  RR: 'rajasthan',
-  MI: 'mumbai',
-  SH: 'hyderabad',
-  DC: 'delhi',
-}
+const teamMatchesApiUrl = 'https://apis.ccbp.in/ipl/'
+
 class TeamMatches extends Component {
   state = {
-    pageThemeColor: '',
-    LatestMatchData: [],
-    matchCardData: [],
-    teamBannerImage: '',
+    teamMatchesData: {},
     isLoading: true,
   }
 
@@ -27,79 +18,105 @@ class TeamMatches extends Component {
     this.getTeamMatchDetails()
   }
 
+  getFormattedData = data => ({
+    umpires: data.umpires,
+    result: data.result,
+    manOfTheMatch: data.man_of_the_match,
+    id: data.id,
+    date: data.date,
+    venue: data.venue,
+    competingTeam: data.competing_team,
+    competingTeamLogo: data.competing_team_logo,
+    firstInnings: data.first_innings,
+    secondInnings: data.second_innings,
+    matchStatus: data.match_status,
+  })
+
   getTeamMatchDetails = async () => {
     const {match} = this.props
     const {params} = match
     const {id} = params
-    const response = await fetch(`https://apis.ccbp.in/ipl/${id}`)
-    const data = await response.json()
-    const bannerImageUrl = data.team_banner_url
-    const formattedLatestMatchDetail = {
-      competingTeam: data.latest_match_details.competing_team,
-      competingTeamLogo: data.latest_match_details.competing_team_logo,
-      date: data.latest_match_details.date,
-      firstInnings: data.latest_match_details.first_innings,
-      id: data.latest_match_details.id,
-      manOfTheMatch: data.latest_match_details.man_of_the_match,
-      matchStatus: data.latest_match_details.match_status,
-      result: data.latest_match_details.result,
-      secondInnings: data.latest_match_details.second_innings,
-      umpires: data.latest_match_details.umpires,
-      venue: data.latest_match_details.venue,
+    const response = await fetch(`${teamMatchesApiUrl}${id}`)
+    const fetchedData = await response.json()
+    const formattedData = {
+      teamBannerURL: fetchedData.team_banner_url,
+      latestMatch: this.getFormattedData(fetchedData.latest_match_details),
+      recentMatches: fetchedData.recent_matches.map(eachMatch =>
+        this.getFormattedData(eachMatch),
+      ),
     }
-    const formattedRecentMatches = data.recent_matches.map(eachItem => ({
-      competingTeam: eachItem.competing_team,
-      competingTeamLogo: eachItem.competing_team_logo,
-      date: eachItem.date,
-      firstInnings: eachItem.first_innings,
-      id: eachItem.id,
-      manOfTheMatch: eachItem.man_of_the_match,
-      matchStatus: eachItem.match_status,
-      result: eachItem.result,
-      secondInnings: eachItem.second_innings,
-      umpires: eachItem.umpires,
-      venue: eachItem.venue,
-    }))
     this.setState({
-      pageThemeColor: teamColorList[id],
-      LatestMatchData: formattedLatestMatchDetail,
-      matchCardData: formattedRecentMatches,
-      teamBannerImage: bannerImageUrl,
+      teamMatchesData: formattedData,
       isLoading: false,
     })
   }
 
-  renderLoader = () => (
-    <div testid="loader">
-      <Loader type="Oval" color="#ffffff" height={50} width={50} />
-    </div>
-  )
+  renderRecentMatchesList = () => {
+    const {teamMatchesData} = this.state
+    const {recentMatches} = teamMatchesData
+
+    return (
+      <ul className="matches-list-container">
+        {recentMatches.map(eachItem => (
+          <MatchCard key={eachItem.id} matchDetails={eachItem} />
+        ))}
+      </ul>
+    )
+  }
 
   renderTeamMatches = () => {
-    const {teamBannerImage, LatestMatchData, matchCardData} = this.state
+    const {teamMatchesData} = this.state
+    const {teamBannerURL, latestMatch} = teamMatchesData
     return (
       <div className="team-matches-container">
         <img
-          src={teamBannerImage}
+          src={teamBannerURL}
           alt="team banner"
           className="team-banner-image"
         />
-        <h1 className="latest-match-heading">Latest Matches</h1>
-        <LatestMatch LatestMatchData={LatestMatchData} />
-        <ul className="matches-list-container">
-          {matchCardData.map(eachItem => (
-            <MatchCard key={eachItem.id} matchDetails={eachItem} />
-          ))}
-        </ul>
+        <LatestMatch LatestMatchData={latestMatch} />
+        {this.renderRecentMatchesList()}
       </div>
     )
   }
 
+  getPageThemeColor = () => {
+    const {match} = this.props
+    const {params} = match
+    const {id} = params
+    switch (id) {
+      case 'RCB':
+        return 'rcb'
+      case 'KKR':
+        return 'kkr'
+      case 'KXP':
+        return 'kxp'
+      case 'CSK':
+        return 'csk'
+      case 'RR':
+        return 'rr'
+      case 'MI':
+        return 'mi'
+      case 'SH':
+        return 'srh'
+      case 'DC':
+        return 'dc'
+      default:
+        return ''
+    }
+  }
+
+  renderLoader = () => (
+    <div data-testid="loader" className="loader-container">
+      <Loader type="Oval" color="#ffffff" height={50} width={50} />
+    </div>
+  )
+
   render() {
-    const {pageThemeColor, isLoading} = this.state
-    const pageBgClass = `team-matches-bg-container ${pageThemeColor}`
+    const {isLoading} = this.state
+    const pageTheme = `team-matches-bg-container ${this.getPageThemeColor()}`
     return (
-      <div className={pageBgClass}>
+      <div className={pageTheme}>
         {isLoading ? this.renderLoader() : this.renderTeamMatches()}
       </div>
     )

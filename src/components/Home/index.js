@@ -26,29 +26,19 @@ class Home extends Component {
   }
 
   renderLoader = () => (
-    <div testid="loader">
+    <div data-testid="loader" className="loader-container">
       <Loader type="Oval" color="#ffffff" height={50} width={50} />
     </div>
   )
 
-  renderHomePage = () => {
+  renderTeamList = () => {
     const {iplTeamsData} = this.state
     return (
-      <div className="home-container">
-        <div className="home-logo-container">
-          <img
-            src="https://assets.ccbp.in/frontend/react-js/ipl-logo-img.png"
-            alt="ipl logo"
-            className="ipl-logo"
-          />
-          <h1 className="ipl-logo-heading">IPL Dashboard</h1>
-        </div>
-        <ul className="team-list-container">
-          {iplTeamsData.map(eachTeam => (
-            <TeamCard key={eachTeam.id} teamDetails={eachTeam} />
-          ))}
-        </ul>
-      </div>
+      <ul className="team-list-container">
+        {iplTeamsData.map(eachTeam => (
+          <TeamCard key={eachTeam.id} teamDetails={eachTeam} />
+        ))}
+      </ul>
     )
   }
 
@@ -56,7 +46,17 @@ class Home extends Component {
     const {isLoading} = this.state
     return (
       <div className="home-bg">
-        {isLoading ? this.renderLoader() : this.renderHomePage()}
+        <div className="home-container">
+          <div className="home-logo-container">
+            <img
+              src="https://assets.ccbp.in/frontend/react-js/ipl-logo-img.png"
+              alt="ipl logo"
+              className="ipl-logo"
+            />
+            <h1 className="ipl-logo-heading">IPL Dashboard</h1>
+          </div>
+          {isLoading ? this.renderLoader() : this.renderTeamList()}
+        </div>
       </div>
     )
   }
